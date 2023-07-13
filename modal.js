@@ -11,28 +11,30 @@ window.addEventListener("DOMContentLoaded", function () {
 
   /*************************MODAL******************************/
   // DOM Elements
-  const modalbg = document.querySelector(".bground");
-  const modalBtn = document.querySelectorAll(".modal-btn");
+  const modalbg = document.querySelector(".bground"); //  récuperation modal d'inscription 
+  const modalBtn = document.querySelectorAll(".modal-btn"); // récuperation bouton modal d'inscription 
   const formData = document.querySelectorAll(".formData");
 
   // launch modal event
-  modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+  modalBtn.forEach((btn) => btn.addEventListener("click", launchModal)); // on récupere le bouton et au clic la modal se lance
 
   // launch modal form
   function launchModal() {
-    modalbg.style.display = "block";
-    document.body.classList.add('modal-open'); 
+    modalbg.style.display = "block"; // modalbg devient block avec la fonction launchmodal que l'ont execute juste au dessus 
+    document.body.classList.add('modal-open');
+    console.log("document:",document.body.classList) // on enleve la sroll bar down 
 
   }
 
   // close modal event
-  const modalClose = document.getElementById("close-modal");
-  modalClose.addEventListener("click", closeModal);
+  const modalClose = document.getElementById("close-modal"); //on récupere close modal et au clic la modal se lance
+  modalClose.addEventListener("click", closeModal); // au clic sur la croix la modal se ferme 
 
   // close modal form
   function closeModal() {
-    modalbg.style.display = "none";
-    document.body.classList.remove('modal-open'); 
+    modalbg.style.display = "none";  // modalbg devient display none avec la fonction closechmodal que l'ont execute juste au dessus
+    document.body.classList.remove('modal-open');
+     // on enleve la sroll bar down 
 
   }
 
@@ -41,7 +43,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 /*************************MODALTHANKS******************************/
 
-  const modalThanksBg = document.querySelector(".thanks-modal");
+  const modalThanksBg = document.querySelector(".thanks-modal"); 
 
 
   // launch modal event
@@ -88,7 +90,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
   function validate() {
 
-    var firstNameInputValue,
+    let firstNameInputValue,
       lastNameInputValue,
       emailInputValue,
       quantityInputValue,
