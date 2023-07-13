@@ -13,7 +13,6 @@ window.addEventListener("DOMContentLoaded", function () {
   // DOM Elements
   const modalbg = document.querySelector(".bground"); //  récuperation modal d'inscription 
   const modalBtn = document.querySelectorAll(".modal-btn"); // récuperation bouton modal d'inscription 
-  const formData = document.querySelectorAll(".formData");
 
   // launch modal event
   modalBtn.forEach((btn) => btn.addEventListener("click", launchModal)); // on récupere le bouton et au clic la modal se lance
@@ -21,8 +20,7 @@ window.addEventListener("DOMContentLoaded", function () {
   // launch modal form
   function launchModal() {
     modalbg.style.display = "block"; // modalbg devient block avec la fonction launchmodal que l'ont execute juste au dessus 
-    document.body.classList.add('modal-open');
-    console.log("document:",document.body.classList) // on enleve la sroll bar down 
+    document.body.classList.add('modal-open'); // on add la class modal open son css "hoverflow hidden" 
 
   }
 
@@ -32,8 +30,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
   // close modal form
   function closeModal() {
-    modalbg.style.display = "none";  // modalbg devient display none avec la fonction closechmodal que l'ont execute juste au dessus
-    document.body.classList.remove('modal-open');
+    modalbg.style.display = "none";  // modalbg devient display none avec la fonction closecmodal que l'ont execute juste au dessus
+    document.body.classList.remove('modal-open'); // on remove css hoverflow hidden
      // on enleve la sroll bar down 
 
   }
@@ -43,43 +41,45 @@ window.addEventListener("DOMContentLoaded", function () {
 
 /*************************MODALTHANKS******************************/
 
-  const modalThanksBg = document.querySelector(".thanks-modal"); 
+  const modalThanksBg = document.querySelector(".thanks-modal"); // on récupère la modal de remerciement 
 
 
-  // launch modal event
 
   // launch modal form
   function launchModalThanks() {
-    modalThanksBg.style.display = "block";
+    modalThanksBg.style.display = "block";  // quand la fonction launchModalThanks est active ".thanks-modal" devient block et 
+    //donc s'affiche ( la fonction est appelé a la fin de la fonction validate)
   }
 
 
   // close modal event
-  const modalCloseThanks = document.querySelector(".thanks-modal");
-  modalCloseThanks.addEventListener("click", closeModalThx);
+  const modalCloseThanks = document.querySelector(".thanks-modal"); // on récupère .thanks-modal
+  modalCloseThanks.addEventListener("click", closeModalThx); // on récupere la modal de remerciement et au clic la 
+  //fonction closeModalThx se lance ce qui ferme la modal de remerciement
+
 
   // close modal form
   function closeModalThx() {
-    modalCloseThanks.style.display = "none";
+    modalCloseThanks.style.display = "none"; // // .thanks-modal devient display none avec la fonction closemodalThx que l'ont execute juste au dessus
   }
 
 
 
   
-  const btnSubmit = document.querySelector(".btn-submit");
+  const btnSubmit = document.querySelector(".btn-submit"); // on récupere le bouton submit du formulaire
 
-  btnSubmit.addEventListener("click", function (event) {
-    event.preventDefault();
+  btnSubmit.addEventListener("click", function (event) { 
+    event.preventDefault(); 
     return validate();
-
+      // on récupère btnsubmit, on preventDefault pour annuler 
+      //le comportement de base de l'élèment et on return validate pour valider le formualire et fermer la modal
   });
 
   const firstNameInput = document.querySelector("#first");
   const lastNameInput = document.querySelector("#last");
   const emailInput = document.querySelector("#email");
   const quantityInput = document.querySelector("#quantity");
-  //const locationInputs = document.querySelectorAll('input[name="location"]');
-  //const cguInput = document.querySelector('input[name="checkbox1"]');
+  
 
   const firstNameError = document.getElementById("firstname-error");
   const lastNameError = document.getElementById("lastname-error");
@@ -88,7 +88,9 @@ window.addEventListener("DOMContentLoaded", function () {
   const locationError = document.getElementById("location-error");
   const cguError = document.getElementById("cgu-error");
 
-  function validate() {
+  //on créer des constantes pour récupérer chaque element de chaque class du formulaire
+
+  function validate() {  // on lance la fonction validate
 
     let firstNameInputValue,
       lastNameInputValue,
@@ -96,16 +98,24 @@ window.addEventListener("DOMContentLoaded", function () {
       quantityInputValue,
       quantityInputValueParsed,
       locationInputChecked,
-      cguInputChecked;
+      cguInputChecked; // on déclare des variables pour chaques elements
       hasErrors = false; 
+      //hasErrors est initialisée à false, ce qui signifie qu'aucune erreur n'a encore été détectée. 
+      //Ensuite, à chaque vérification de champ, si une erreur est trouvée, la variable hasErrors est définie sur true.
+      //Finalement, à la fin de la fonction validate(), la valeur de hasErrors est vérifiée. Si elle est toujours false, 
+      //cela signifie qu'aucune erreur n'a été trouvée dans les champs du formulaire.
+      
+      
+      //sans cette variable la gestion des erreurs serait diffile a gérer
 
     firstNameInputValue = firstNameInput.value;
     lastNameInputValue = lastNameInput.value;
     emailInputValue = emailInput.value;
     quantityInputValue = quantityInput.value;
-    quantityInputValueParsed = parseInt(quantityInputValue);
+    quantityInputValueParsed = parseInt(quantityInputValue); //le parsint est obligatoire. sans cette fonction "isnan" il return un faux positif
     locationInputChecked = document.querySelector('input[name="location"]:checked');
     cguInputChecked = document.querySelector('input[name="checkbox1"]:checked');
+    //on assignes une valeur a la variable
 
 
     if (firstNameInputValue.trim() === "" || firstNameInputValue.length < 2) {
@@ -154,6 +164,7 @@ window.addEventListener("DOMContentLoaded", function () {
     if (hasErrors===false) {
       launchModalThanks()
       closeModal()
+      //si haserrors === false alors il n'y a pas d'erreurs la fonction devient true, on lance donc la fonction launchmodalThanks et closeModal
     }
     
     
